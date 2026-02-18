@@ -40,17 +40,17 @@ function getDataURIFromBlob(blob) {
 
 let cached_games = []
 
-
+/*
 document.addEventListener("DOMContentLoaded", async () => {
     const file_input = $("exeInput")
 
     const load_exe_radio = $("loadExeRadio")
-    const load_vanilla_radio = $("loadVanillaRadio")
-
-    const add_mods_button = $("addModDir")
-    const clear_mods_button = $("clearMods")
-    const use_lovely_dump_button = $("useLovelyDump")
-
+    
+    //const load_vanilla_radio = $("loadVanillaRadio")
+    //const add_mods_button = $("addModDir")
+    //const clear_mods_button = $("clearMods")
+    //const use_lovely_dump_button = $("useLovelyDump")
+    
     const version_name_input = $("makeName")
 
     const build_button = $("parseBtn")
@@ -60,9 +60,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
-    add_mods_button.onclick = addModDir
-    clear_mods_button.onclick = clearMods
-    use_lovely_dump_button.onclick = useLovelyDump
+    //add_mods_button.onclick = addModDir
+    //clear_mods_button.onclick = clearMods
+    //use_lovely_dump_button.onclick = useLovelyDump
 
     function checkBuildButton() {
         if (file_input.files.length > 0 && load_exe_radio.checked) {
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     file_input.onchange = checkBuildButton
     load_exe_radio.onchange = checkBuildButton
-    load_vanilla_radio.onchange = checkBuildButton
+    //load_vanilla_radio.onchange = checkBuildButton
 
     build_button.addEventListener("click", async function() {
         try {
@@ -112,11 +112,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                     version_name_input.value = "vanilla"
                     name = "vanilla"
                 }
-                if (name != "vanilla") {
-                    if (!confirm("Create a new version without mods, which is not called vanilla? This is redundant unless you want more save slots.")) {
-                        return
-                    }
-                }
+                
+                //if (name != "vanilla") {
+                //    if (!confirm("Create a new version without mods, which is not called vanilla? This is redundant unless you want more save slots.")) {
+                //        return
+                //    }
+                //}
             }
 
             game = await buildFromSource(file, mods);
@@ -173,3 +174,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         showError(err.message)
     }
 })
+*/

@@ -13,8 +13,8 @@ async function renderVersionList() {
     const versionsList = $("versionsList")
     versionsList.innerHTML = ""
     {
-        const load_vanilla_radio = $("loadVanillaRadio")
-        load_vanilla_radio.disabled = versions.indexOf("vanilla") == -1
+        //const load_vanilla_radio = $("loadVanillaRadio")
+        //load_vanilla_radio.disabled = versions.indexOf("vanilla") == -1
     }
     for (const version of versions) {
         const tr = make("tr")
