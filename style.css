@@ -223,7 +223,7 @@ canvas#canvas {
 
 
 :root{
-  background-color: grey;
+  background-color: #0a0f14;
 }
 
 a {
@@ -270,4 +270,13 @@ button{
 
 .center{
   justify-content: center;
+  padding: 10px;
+}
+
+input[type="file"]{
+  display: none;
+}
+
+label{
+  color: #0a0f14;
 }

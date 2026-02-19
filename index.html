@@ -26,10 +26,10 @@
     <div class="container" >
 
         <div class="outer-desc">
-          <h1>Loads executable</h1>
+          <h1 class="joker-title">Loads executable</h1>
 
           <div class="inner-desc">
-              <input type="file" id="exeInput"><br>
+              <label for="exeInput">Click here to load the execuatable (an .exe or .zip)</label><input name="exeInput" type="file" id="exeInput" accept=".zip,.exe"><br>
           </div>
  
 
@@ -39,9 +39,9 @@
         </div>
 
         <div class="outer-desc">
-            <h1 class="center">Download</h1>
+            <h1 class="center joker-title">Download</h1>
             <div class="inner-desc">
-                <p>Click here to download the <a download="patched.zip" href="game/patched.zip">game</a></p>
+                <span>Click here to download the <a download="patched.zip" href="game/Balatro.exe">game</a>.<br> Be careful, you <mult>must</mult> own the game to download it.</span>
             </div>
         </div>
         
@@ -56,7 +56,7 @@
             console.log(game)
             await play_game_from_blob(game)
           }else{
-            showError("You didn't load the balatro version")
+            alert("You didn't load the balatro version")
           }
           
         }
