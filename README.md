@@ -15,6 +15,12 @@ For some reasons, saving never works.
 
 In this fork, there are no portable version, no mods, no save, no caching.
 
+## Disclamer
+
+This code can be used to distribute a working copy of Balatro. HOWEVER, you should NOT do it on the internet, or in public. Distributing a copy of Balatro is NOT legal, and I do not encourage you to do it. The most legal way to use this site is to use your own copy of the Balatro each time and to not share it with other. This repositorie does NOT contain a copy of Balatro, as it would be illegal. 
+
+If you want to be able to download of copy of Balatro from the site, you should put the copy in the game/ folder and name it "Balatro.exe" (its normal name on Windows with Steam)
+
 ## Credits
 
 [Balatro CSS](https://pound-os.neocities.org/balatro_css) by @poundpound0209 on discord. Huge thanks for its amazing work!
