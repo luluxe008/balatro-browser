@@ -348,8 +348,14 @@ async function buildFromSource(blob, mods) {
         progress_bar.value = "70"
 
         {
-            const contents = await zipfile.file("globals.lua").async("string")
+            let contents = await zipfile.file("globals.lua").async("string")
+            contents = contents.replace("self.F_QUIT_BUTTON = true", "self.F_QUIT_BUTTON = false")
+            contents = contents.replace("self.F_SKIP_TUTORIAL = false", "self.F_SKIP_TUTORIAL = true")
             zipfile.file("globals.lua", contents.replace("F_SOUND_THREAD = true", "F_SOUND_THREAD = false"))
+
+            contents = await zipfile.file("game.lua").async("string")
+            contents = contents.replace("local TESTHELPER_unlocks = false and not _RELEASE_MODE", "local TESTHELPER_unlocks = true")
+            zipfile.file("game.lua", contents)
         }
 
         progress_bar.value = "80"
