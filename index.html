@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Balatro on the Web</title>
     <link rel="stylesheet" href="style.css" />
+    <link href="https://pound-os.neocities.org/balatro.css" rel="stylesheet">
     <script src="lib/data.js"></script>
     <script src="lib/FileSaver.min.js"></script>
     <script src="lib/jszip.min.js"></script>
@@ -17,106 +18,35 @@
     <script src="patches.js"></script>
     <script src="runVersion.js"></script>
 
-    <script src="loadVersion.js"></script>
+    <!--<script src="loadVersion.js"></script>-->
     <script src="build.js"></script>
     <script src="app.js"></script>
   </head>
-  <body>
-    <div class="container">
-      <h1>Balatro</h1>
+  <body style="display: flex;" class="center">
+    <div class="container" >
 
-      <section>
-        <div class="options">
-          <label >Executable:</label><input type="file" id="exeInput"><br>
+        <div class="outer-desc">
+          <h1>Loads executable</h1>
+
+          <div class="inner-desc">
+              <input type="file" id="exeInput"><br>
+          </div>
+ 
+
         </div>
-        <div class="center">
-          <button id="myBtn">Play the game</button>
+        <div style="display: flex;" class="center">
+          <button id="myBtn">PLAY</button>
+        </div>
+
+        <div class="outer-desc">
+            <h1 class="center">Download</h1>
+            <div class="inner-desc">
+                <p>Click here to download the <a download="patched.zip" href="game/patched.zip">game</a></p>
+            </div>
         </div>
         
-      <!--
-        <div class="makeName">
-          <label for="makeName">Name: </label><input id="makeName" placeholder="vanilla">
-        </div>
-        <div class="center">
-          <button id="parseBtn" disabled>Build</button>
-        </div>
-        
-        --> 
-        <progress id="progressBar" value="0" max="100" class="progress hidden"></progress>
-        <div class="center">
-          <p id="status">&ZeroWidthSpace;</p>
-        </div>
-      </section>
-
-      <section>
-        <h3 class="center">Download</h3>
-        
-        <a download="patched.zip" href="game/patched.zip">Patched version</a>
-         
-
-      </section>
-      <!--
-      <section>
-        <h2>Player</h2>
-        <div class="player-controls">
-          <p id="loadedName">Nothing loaded</p>
-          <button id="runBtn" disabled>Start Game</button>
-          <button id="downloadCachedBtn" disabled>Download Version</button>
-          <button id="makePortableBtn" disabled>Make Portable</button>
-        </div>
-      </section>
-      
-      <section>
-        <h2>Save Data</h2>
-        <button disabled id="save-download">Download</button>
-        <button disabled id="save-upload">Upload</button>
-        <button disabled id="save-delete">Delete</button>
-      </section>
-     
-
-      <section>
-        <h2>Versions</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="versionsList">
-          </tbody>
-        </table>
-      </section>
-       -->
-      <!-- Error Modal -->
-      <div id="errorModal" class="modal hidden">
-        <div class="modal-content">
-          <span id="closeModal" class="close">&times;</span>
-          <h2>Error</h2>
-          <p id="errorMessage">Something went wrong.</p>
-        </div>
-      </div>
+    </div>
       <script>
-        const errorModal = document.getElementById("errorModal");
-        const closeModal = document.getElementById("closeModal");
-        const errorMessage = document.getElementById("errorMessage");
-
-        function showError(message) {
-          errorMessage.textContent = message;
-          errorModal.classList.remove("hidden");
-        }
-
-        closeModal.onclick = () => {
-          errorModal.classList.add("hidden");
-        };
-
-        window.onclick = (event) => {
-          if (event.target === errorModal) {
-            errorModal.classList.add("hidden");
-          }
-        };
-
-
         async function play(){
             const file_input = document.getElementById("exeInput")
 

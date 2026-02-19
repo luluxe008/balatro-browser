@@ -25,11 +25,6 @@ function string_searchAll(string, regex) {
  * @returns {Promise<Blob>} .zip of patched source
  */
 async function buildFromSource(blob, mods) {
-    const progress_bar = $("progressBar")
-    const status_text = $("status")
-
-    progress_bar.value = "0"
-    status_text.innerText = "Finding Source"
 
     const buffer = await blob.arrayBuffer()
     const reader = new BufferReader(buffer)
@@ -42,7 +37,6 @@ async function buildFromSource(blob, mods) {
         reader.step(-3)
     }
 
-    progress_bar.value = "30"
     reader.step(-4)
     const pkfile = reader.bytes(reader.view.byteLength - reader.offset)
 
@@ -88,8 +82,6 @@ async function buildFromSource(blob, mods) {
         current.file(path.split("/").at(-1), data)
     }
 
-    progress_bar.value = "40"
-    status_text.innerText = "Extracting zip"
     const zipfile = await JSZip.loadAsync(new Blob([pkfile]))
 
     // THE TYPE!
@@ -325,8 +317,6 @@ async function buildFromSource(blob, mods) {
 
     move_dir(mods_without_dump, "Mods/")
 
-    progress_bar.value = "50"
-    status_text.innerText = "Applying Patches"
     
     for (const patch_file of Object.keys(window.patches)) {
         zipfile.file(patch_file, window.patches[patch_file])
@@ -334,7 +324,6 @@ async function buildFromSource(blob, mods) {
 
     // If source has been patched already, and it hasn't been overwritten by a dump, skip patching.
     if (!zipfile.file("web_patched") || mods["Dump from Lovely"]) {
-        progress_bar.value = "60"
 
         {
             const main = zipfile.file("main.lua")
@@ -345,14 +334,12 @@ async function buildFromSource(blob, mods) {
             zipfile.file("main.lua", contents)
         }
 
-        progress_bar.value = "70"
 
         {
             const contents = await zipfile.file("globals.lua").async("string")
             zipfile.file("globals.lua", contents.replace("F_SOUND_THREAD = true", "F_SOUND_THREAD = false"))
         }
 
-        progress_bar.value = "80"
 
         {
             const contents = await zipfile.folder("resources").folder("shaders").file("hologram.fs").async("string")
@@ -363,12 +350,8 @@ async function buildFromSource(blob, mods) {
         zipfile.file("web_patched", "true")
     }
 
-    progress_bar.value = "90"
 
-    status_text.innerText = "Zipping zip"
     const game = await zipfile.generateAsync({ type: "blob" })
-    progress_bar.value = "100"
-    status_text.innerText = "Done"
 
     return game
 }
