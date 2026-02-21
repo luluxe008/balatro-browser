@@ -25,11 +25,21 @@
   <body style="display: flex;" class="center">
     <div class="container" >
 
+
+        <div class="outer-desc" id="autoload">
+          <h1 class="joker-title">Autoload</h1>
+          <div class="inner-desc">
+            <span>Click on this joker to <chips>autoload</chips> the game.</span>
+          </div>
+        </div>
+
+
+
         <div class="outer-desc">
-          <h1 class="joker-title">Loads executable</h1>
+          <h1 class="joker-title">Manual Load</h1>
 
           <div class="inner-desc">
-              <label for="exeInput">Click here to load the execuatable (an .exe or .zip)</label><input name="exeInput" type="file" id="exeInput" accept=".zip,.exe"><br>
+              <label for="exeInput">Click here to <chips>manually</chips> load the execuatable (an .exe or .zip)</label><input name="exeInput" type="file" id="exeInput" accept=".zip,.exe"><br>
           </div>
  
 
@@ -47,15 +57,37 @@
         
     </div>
       <script>
-        async function play(){
-            const file_input = document.getElementById("exeInput")
+        const autoload = document.getElementById("autoload")
 
+        autoload.onclick = () => {
+          download_game()
+        }
+
+        let game_blob;
+
+        async function download_game(){
+          //download the game from the game/ directory
+          var reponse = await fetch("game/Balatro.exe");
+          var blob = await reponse.blob()
+          console.log("game loaded")
+          game_blob = blob
+        }
+
+        async function play(){
+          const file_input = document.getElementById("exeInput")
+
+         
           if (file_input.files.length == 1){
-            console.log("trying to load game...");
+            console.log("There is a file, loading it from file...");
             let game = await buildFromSource(file_input.files[0], {});
-            console.log(game)
             await play_game_from_blob(game)
-          }else{
+          }
+          else if (game_blob){
+            console.log("there is a game blob, loading it from blob")
+            let game = await buildFromSource(game_blob, {});
+            await play_game_from_blob(game)
+          }
+          else{
             alert("You didn't load the balatro version")
           }
           
