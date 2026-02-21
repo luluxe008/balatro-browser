@@ -29,17 +29,17 @@
         <div class="outer-desc" id="autoload">
           <h1 class="joker-title">Autoload</h1>
           <div class="inner-desc">
-            <span>Click on this joker to <chips>autoload</chips> the game.</span>
+            <span>Click here to <chips>autoload</chips> the game.<br/><gray id="autoload-info">(currently unloaded)</gray></span>
           </div>
         </div>
 
 
 
-        <div class="outer-desc">
+        <div class="outer-desc" id="manual-load">
           <h1 class="joker-title">Manual Load</h1>
 
           <div class="inner-desc">
-              <label for="exeInput">Click here to <chips>manually</chips> load the execuatable (an .exe or .zip)</label><input name="exeInput" type="file" id="exeInput" accept=".zip,.exe"><br>
+              <label for="exeInput" id="input-label">Click here to <chips>manually</chips> load the execuatable (an .exe or .zip)<br/><gray id="file-name">(no file loaded)</gray></label><input name="exeInput" type="file" id="exeInput" accept=".zip,.exe"><br>
           </div>
  
 
@@ -48,10 +48,10 @@
           <button id="myBtn">PLAY</button>
         </div>
 
-        <div class="outer-desc">
+        <div class="outer-desc" id="download">
             <h1 class="center joker-title">Download</h1>
             <div class="inner-desc">
-                <span>Click here to download the <a download="Balatro.exe" href="game/Balatro.exe">game</a>.<br> Be careful, you <mult>must</mult> own the game to download it.</span>
+                <span>Click here to download the game.<br><gray>(This will download your <mult>own copy</mult> of Balatro)</gray></span>
             </div>
         </div>
         
@@ -59,11 +59,42 @@
       <script>
         const autoload = document.getElementById("autoload")
 
-        autoload.onclick = () => {
-          download_game()
-        }
+        const input = document.getElementById("exeInput")
+        const file_name = document.getElementById("file-name")
+        const autoload_info = document.getElementById("autoload-info")
+        
+        let prefer = "none"
 
         let game_blob;
+
+
+        if (input.files.length > 0){
+          file_name.textContent = "(" + input.files[0].name + " is loaded)"
+          prefer = "file"
+        }
+
+
+        input.onchange = (event) => {
+          file_name.textContent = "(" +input.files[0].name + " is loaded)"
+          prefer = "file"
+        }
+
+        autoload.onclick = download_game
+
+        document.getElementById("myBtn").onclick = () =>{
+          play()
+        }
+
+        document.getElementById("download").onclick = () => {
+          let a = document.createElement("a")
+          a.href = "game/Balatro.exe"
+          a.download = "Balatro.exe"
+          a.click()
+        }
+
+        document.getElementById("manual-load").onclick = () => {
+          input.click()
+        }
 
         async function download_game(){
           //download the game from the game/ directory
@@ -71,18 +102,20 @@
           var blob = await reponse.blob()
           console.log("game loaded")
           game_blob = blob
+          autoload_info.textContent = "(currently loaded)"
+          prefer = "download"
         }
 
         async function play(){
           const file_input = document.getElementById("exeInput")
 
          
-          if (file_input.files.length == 1){
+          if (prefer == "file"){
             console.log("There is a file, loading it from file...");
             let game = await buildFromSource(file_input.files[0], {});
             await play_game_from_blob(game)
           }
-          else if (game_blob){
+          else if (prefer == "download"){
             console.log("there is a game blob, loading it from blob")
             let game = await buildFromSource(game_blob, {});
             await play_game_from_blob(game)
@@ -93,9 +126,7 @@
           
         }
 
-        document.getElementById("myBtn").onclick = () =>{
-          play()
-        }
+        
       </script>
     </div>
   </body>
