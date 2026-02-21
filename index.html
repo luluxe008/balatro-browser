@@ -27,25 +27,31 @@
 
 
         <div class="outer-desc" id="autoload">
-          <h1 class="joker-title">Autoload</h1>
+          <h1 class="joker-title">Load the game</h1>
           <div class="inner-desc">
-            <span>Click here to <chips>autoload</chips> the game.<br/><gray id="autoload-info">(currently unloaded)</gray></span>
+            <span>Click here to <chips>load</chips> the game.<br/><gray id="autoload-info">(currently unloaded)</gray></span>
           </div>
         </div>
 
+
+
+        
+ 
+
+        <div style="display: flex;" class="center">
+          <button id="myBtn">PLAY</button>
+        </div>
 
 
         <div class="outer-desc" id="manual-load">
           <h1 class="joker-title">Manual Load</h1>
 
           <div class="inner-desc">
-              <label for="exeInput" id="input-label">Click here to <chips>manually</chips> load the execuatable (an .exe or .zip)<br/><gray id="file-name">(no file loaded)</gray></label><input name="exeInput" type="file" id="exeInput" accept=".zip,.exe"><br>
+            <label for="exeInput" id="input-label">Click here to <chips>manually</chips> load the execuatable (an .exe or .zip)<br/>
+              <gray id="file-name">(no file loaded)</gray>
+              <br/><mult>WARNING: </mult>On IOS this doesn't seem to work</label>
+              <input name="exeInput" type="file" id="exeInput" accept=".zip,.exe">
           </div>
- 
-
-        </div>
-        <div style="display: flex;" class="center">
-          <button id="myBtn">PLAY</button>
         </div>
 
         <div class="outer-desc" id="download">
@@ -79,7 +85,7 @@
           prefer = "file"
         }
 
-        autoload.onclick = download_game
+        autoload.onclick = fetch_game
 
         document.getElementById("myBtn").onclick = () =>{
           play()
@@ -96,15 +102,6 @@
           input.click()
         }
 
-        async function download_game(){
-          //download the game from the game/ directory
-          var reponse = await fetch("game/Balatro.exe");
-          var blob = await reponse.blob()
-          console.log("game loaded")
-          game_blob = blob
-          autoload_info.textContent = "(currently loaded)"
-          prefer = "download"
-        }
 
         async function play(){
           const file_input = document.getElementById("exeInput")
@@ -126,6 +123,30 @@
           
         }
 
+
+        async function fetch_game(){
+          var res = await fetch("game/Balatro.exe")
+          var reader = res.body.getReader()
+          const contentLength = res.headers.get('content-length');
+          const total = parseInt(contentLength, 10);
+          var values = []
+          var loaded = 0
+
+          while (true){
+            var {done, value} = await reader.read()
+            if (done) break;
+            loaded += value.byteLength
+            values.push(value)
+            autoload_info.innerText = "(" + ((loaded/total)*100).toFixed(1) + "% loaded)"
+          }
+
+          var blob = new Blob(values)
+          game_blob = blob
+
+          autoload_info.innerText = "(fully loaded)"
+
+          prefer = "download"
+        }
         
       </script>
     </div>

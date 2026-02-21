@@ -23,7 +23,7 @@ In this fork, there are no portable version, no mods, no save, no caching.
 
 ## Disclamer
 
-Distributing a copy of Balatro is NOT legal, you need to use your own copy of the Balatro each time and to not share it with other. This repository does not contain any game files, assets, or copyrighted material.
+Distributing a copy of Balatro is NOT legal, you need to use your own copy of the Balatro each time and do not share it with other. This repository does not contain any game files, assets, or copyrighted material.
 
 ## Credits
 
