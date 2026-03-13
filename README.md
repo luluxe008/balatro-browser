@@ -18,7 +18,7 @@ This project does not need to be built, so installation is as simple as using `g
 
 ## Limitations
 
-For some reasons, saving never works.
+For some reasons, saving never works. UPDATE: it seems to work now, for some reasons...
 In this fork, there are no portable version, no mods, no save, no caching.
 
 ## Disclamer
