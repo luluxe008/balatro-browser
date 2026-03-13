@@ -345,10 +345,17 @@ async function buildFromSource(blob, mods) {
             
         }
         {
+            //unlock everything FIXME
             let contents = await zipfile.file("game.lua").async("string")
             contents = contents.replace("local TESTHELPER_unlocks = false and not _RELEASE_MODE", "local TESTHELPER_unlocks = true")
             zipfile.file("game.lua", contents)
-        }   
+        }
+        {
+            //hack the save function
+            let contents = await zipfile.file("engine/string_packer.lua").async("string")
+            contents = contents.replace("local save_string = type(_data) == 'table' and STR_PACK(_data) or _data", "local save_string = type(_data) == 'table' and STR_PACK(_data) or _data\nprint(G.F_SAVE_TIMER)")
+            zipfile.file("engine/string_packer.lua", contents)
+        }
 
         {
             const contents = await zipfile.folder("resources").folder("shaders").file("hologram.fs").async("string")

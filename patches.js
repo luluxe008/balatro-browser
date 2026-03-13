@@ -435,6 +435,10 @@ function FakeChannel:push(value)
 end
 
 function FakeChannel:pop()
+    if self.name == "http_response" then
+        -- to prevent console spamming
+        return table.remove(self.queue, 1)
+    end
     print("Popping value from channel" .. " - " .. self.name)
     return table.remove(self.queue, 1)
 end
