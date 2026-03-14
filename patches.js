@@ -483,7 +483,11 @@ end
 
 -- Patch load for smods
 -- btw, mod support is pretty nonexistent
-load = loadstring`,
+load = loadstring
+
+
+
+`,
 // -------------------------------------------------------------------------------
   "nativefs.lua": `-- faknativefs.lua
 local nativefs = {}

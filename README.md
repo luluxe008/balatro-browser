@@ -16,10 +16,14 @@ You can now download your own version from the site and use it in the "Load exec
 
 This project does not need to be built, so installation is as simple as using `git clone` or downloading the source from github.
 
+
+## Saves
+
+Thanks to [love-with-js](https://github.com/HamdyElzanqali/love-with-js) by HamdyElzanqali, saves are now possible
+
 ## Limitations
 
-For some reasons, saving never works. UPDATE: it seems to work now, for some reasons...
-In this fork, there are no portable version, no mods, no save, no caching.
+In this fork, there are no portable version, no mods.
 
 ## Disclamer
 
@@ -36,6 +40,8 @@ Distributing a copy of Balatro is NOT legal, you need to use your own copy of th
 [Balatro](https://www.playbalatro.com/) by LocalThunk
 
 [Lovely](https://github.com/ethangreen-dev/lovely-injector) by Ethan Green
+
+[love-with-js](https://github.com/HamdyElzanqali/love-with-js) by HamdyElzanqali
 
 ## License
 This project is originaly under the MIT license, and my modifications are also under the MIT license. 

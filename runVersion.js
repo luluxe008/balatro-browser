@@ -1,23 +1,6 @@
 
 /*loadCachedGame(version).then*/
 async function play_game_from_blob(game) {
-    /*
-    const PREFIX = "Balatro_" + version + "_";
-
-    const originalOpen = indexedDB.open;
-    const originalDeleteDatabase = indexedDB.deleteDatabase;
-
-    indexedDB.open = function(name, version) {
-        const prefixedName = PREFIX + name;
-        return version !== undefined
-        ? originalOpen.call(this, prefixedName, version)
-        : originalOpen.call(this, prefixedName);
-    };
-
-    indexedDB.deleteDatabase = function(name) {
-        const prefixedName = PREFIX + name;
-        return originalDeleteDatabase.call(this, prefixedName);
-    };*/
 
     document.body.innerHTML = ""
     const canvas = document.createElement("canvas")
@@ -44,7 +27,7 @@ async function play_game_from_blob(game) {
     // The package exports the Love function
     var s = document.createElement('script');
     s.type = 'text/javascript';
-    s.src = "run/11.5/love.min.js";
+    s.src = "run/11.5/love_HamdyElzanqali.js";
     s.async = true;
     s.onload = function () {
         Love(Module);
